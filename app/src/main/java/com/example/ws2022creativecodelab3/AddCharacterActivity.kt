@@ -3,6 +3,7 @@ package com.example.ws2022creativecodelab3
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore.Images.Media
@@ -27,7 +28,17 @@ class AddCharacterActivity : AppCompatActivity() {
             resultLauncher.launch(phoneGallery)
         }
 
-        binding.saveButton.setOnClickListener { saveNewCharacter() }
+        if (intent.getStringExtra("id") != null) {
+            val character = myDB.getOneCharacter(intent.getStringExtra("id").toString())
+            val bitmap = BitmapFactory.decodeByteArray(character.image, 0, character.image.size)
+
+            binding.imageInput.setImageBitmap(bitmap)
+            binding.nameInput.setText(character.name)
+
+            binding.saveButton.setOnClickListener { updateOldCharacter() }
+        } else {
+            binding.saveButton.setOnClickListener { saveNewCharacter() }
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -51,6 +62,17 @@ class AddCharacterActivity : AppCompatActivity() {
         val name = binding.nameInput.text.toString()
 
         myDB.addCharacter(image, name)
+        finish()
+    }
+
+    fun updateOldCharacter() {
+        val bitmap = binding.imageInput.drawToBitmap()
+        val stream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+        val image = stream.toByteArray()
+        val name = binding.nameInput.text.toString()
+
+        myDB.updateCharacter(intent.getStringExtra("id").toString(), image, name)
         finish()
     }
 }

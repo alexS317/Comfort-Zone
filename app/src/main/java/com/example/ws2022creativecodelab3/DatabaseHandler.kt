@@ -33,6 +33,20 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, dbName, null
         db.insert(characterTable, characterId, ctv)
     }
 
+    fun updateCharacter(id: String, image: ByteArray, name: String): Int {
+        val db = this.writableDatabase
+        val ctv = ContentValues()
+        ctv.put(characterImage, image)
+        ctv.put(characterName, name)
+
+        return db.update(characterTable, ctv, "$characterId = ?", arrayOf(id))
+    }
+
+    fun deleteCharacter(id: String): Int {
+        val db = this.writableDatabase
+        return db.delete(characterTable, "$characterId = ?", arrayOf(id))
+    }
+
     data class Characters(
         val ids: MutableList<String>,
         val images: MutableList<ByteArray>,
@@ -67,6 +81,7 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, dbName, null
         val image: ByteArray,
         val name: String
     )
+
     fun getOneCharacter(id: String): Character {
         val db = this.readableDatabase
         var image = byteArrayOf()
