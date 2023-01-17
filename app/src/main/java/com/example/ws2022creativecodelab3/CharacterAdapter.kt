@@ -1,6 +1,7 @@
 package com.example.ws2022creativecodelab3
 
 import android.content.Context
+import android.content.Intent
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
@@ -26,10 +27,17 @@ class CharacterAdapter(
     }
 
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
+        val characterId = characterIds[position]
         val characterImage = characterImages[position]
         val bitmap = BitmapFactory.decodeByteArray(characterImage, 0, characterImage.size)
 
         holder.image.setImageBitmap(bitmap)
+
+        holder.itemView.setOnClickListener {
+            val detailView = Intent(context, CharacterDetailActivity::class.java)
+            detailView.putExtra("id", characterId)
+            context.startActivity(detailView)
+        }
     }
 
     override fun getItemCount(): Int {

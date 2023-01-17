@@ -6,4 +6,22 @@
     android:layout_height="match_parent"
     tools:context=".CharacterDetailActivity">
 
+    <ImageView
+        android:id="@+id/character_Image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_image" />
+    
+    <TextView
+        android:id="@+id/character_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/character_Image"
+        tools:text="Character name" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

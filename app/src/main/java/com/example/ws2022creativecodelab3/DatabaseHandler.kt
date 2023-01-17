@@ -62,4 +62,29 @@ class DatabaseHandler(context: Context) : SQLiteOpenHelper(context, dbName, null
         cursor.close()
         return Characters(allIds, allImages, allNames)
     }
+
+    data class Character(
+        val image: ByteArray,
+        val name: String
+    )
+    fun getOneCharacter(id: String): Character {
+        val db = this.readableDatabase
+        var image = byteArrayOf()
+        var name = toString()
+
+        val cursor = db.rawQuery("SELECT * FROM $characterTable WHERE $characterId = $id", null)
+
+        while (cursor.moveToNext()) {
+            val imageIndex = cursor.getColumnIndex(characterImage)
+            val nameIndex = cursor.getColumnIndex(characterName)
+
+            if (imageIndex >= 0) {
+                image = cursor.getBlob(imageIndex)
+                name = cursor.getString(nameIndex)
+            }
+        }
+
+        cursor.close()
+        return Character(image, name)
+    }
 }
