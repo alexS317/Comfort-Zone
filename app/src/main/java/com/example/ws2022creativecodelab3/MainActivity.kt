@@ -1,6 +1,7 @@
 package com.example.ws2022creativecodelab3
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.ws2022creativecodelab3.databinding.ActivityMainBinding
@@ -14,22 +15,28 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        supportActionBar?.hide()
 
-//        val characters = myDB.getAllCharacters()
-//        binding.characterGallery.adapter = CharacterAdapter(this, characters.ids, characters.images, characters.names)
+        getRandomCharacter()
 
-        binding.addCharacterButton.setOnClickListener { goToAddCharacterView() }
+        binding.affirmationButton.setOnClickListener { getRandomCharacter() }
+        binding.galleryMenu.setOnClickListener {
+            startActivity(Intent(this, GalleryActivity::class.java))
+        }
     }
 
-    override fun onResume() {
-        super.onResume()
+    private fun getRandomCharacter() {
         val characters = myDB.getAllCharacters()
-        binding.characterGallery.adapter =
-            CharacterAdapter(this, characters.ids, characters.images, characters.names)
+        val randomId = characters.ids.random()
+        val randomCharacter = myDB.getOneCharacter(randomId)
+        val bitmap =
+            BitmapFactory.decodeByteArray(randomCharacter.image, 0, randomCharacter.image.size)
 
-    }
+        val affirmations = resources.getStringArray(R.array.default_affirmations)
+        val randomAffirmation = affirmations.random()
 
-    private fun goToAddCharacterView() {
-        startActivity(Intent(this, AddCharacterActivity::class.java))
+        binding.affirmationImage.setImageBitmap(bitmap)
+        binding.affirmationName.text = randomCharacter.name
+        binding.affirmationText.text = randomAffirmation
     }
 }

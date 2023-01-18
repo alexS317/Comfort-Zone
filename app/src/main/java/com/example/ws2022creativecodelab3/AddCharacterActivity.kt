@@ -4,10 +4,13 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore.Images.Media
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.core.view.drawToBitmap
 import com.example.ws2022creativecodelab3.databinding.ActivityAddCharacterBinding
 import java.io.ByteArrayOutputStream
@@ -54,6 +57,7 @@ class AddCharacterActivity : AppCompatActivity() {
             }
         }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun saveNewCharacter() {
         val bitmap = binding.imageInput.drawToBitmap()
         val stream = ByteArrayOutputStream()
@@ -61,18 +65,27 @@ class AddCharacterActivity : AppCompatActivity() {
         val image = stream.toByteArray()
         val name = binding.nameInput.text.toString()
 
-        myDB.addCharacter(image, name)
-        finish()
+        if (!binding.imageInput.drawable.isFilterBitmap || name == "") {
+            Toast.makeText(this, "Please enter a valid name and image.", Toast.LENGTH_SHORT).show()
+        } else {
+            myDB.addCharacter(image, name)
+            finish()
+        }
     }
 
-    fun updateOldCharacter() {
+    private fun updateOldCharacter() {
         val bitmap = binding.imageInput.drawToBitmap()
         val stream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
         val image = stream.toByteArray()
         val name = binding.nameInput.text.toString()
 
-        myDB.updateCharacter(intent.getStringExtra("id").toString(), image, name)
-        finish()
+        if (name == "") {
+            Toast.makeText(this, "Please enter a valid name.", Toast.LENGTH_SHORT).show()
+        } else {
+            myDB.updateCharacter(intent.getStringExtra("id").toString(), image, name)
+            finish()
+        }
+
     }
 }

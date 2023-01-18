@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:adjustViewBounds="true"
-        android:contentDescription="Image Input"
+        android:contentDescription="Image input"
         android:src="@drawable/ic_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,6 +30,7 @@
 
     <Button
         android:id="@+id/save_button"
+        style="@style/ButtonColor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"

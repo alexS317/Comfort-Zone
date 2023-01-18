@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Affirmation App</string>
+    
+    <string-array name="default_affirmations">
+        <item>is proud of you!</item>
+        <item>wants you to have a great day!</item>
+        <item>believes in you!</item>
+    </string-array>
 </resources>
