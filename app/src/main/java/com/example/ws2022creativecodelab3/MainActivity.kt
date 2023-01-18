@@ -27,6 +27,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun getRandomCharacter() {
         val characters = myDB.getAllCharacters()
+
+        if (characters.ids.size == 0) {
+            startActivity(Intent(this, AddCharacterActivity::class.java))
+        } else {
         val randomId = characters.ids.random()
         val randomCharacter = myDB.getOneCharacter(randomId)
         val bitmap =
@@ -38,5 +42,7 @@ class MainActivity : AppCompatActivity() {
         binding.affirmationImage.setImageBitmap(bitmap)
         binding.affirmationName.text = randomCharacter.name
         binding.affirmationText.text = randomAffirmation
+        }
     }
+
 }

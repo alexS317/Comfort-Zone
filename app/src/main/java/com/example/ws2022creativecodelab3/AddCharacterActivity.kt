@@ -20,6 +20,7 @@ class AddCharacterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddCharacterBinding
     private val myDB = DatabaseHandler(this)
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddCharacterBinding.inflate(layoutInflater)
