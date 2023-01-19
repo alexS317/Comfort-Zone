@@ -87,6 +87,5 @@ class AddCharacterActivity : AppCompatActivity() {
             myDB.updateCharacter(intent.getStringExtra("id").toString(), image, name)
             finish()
         }
-
     }
 }

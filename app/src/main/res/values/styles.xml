@@ -4,7 +4,7 @@
     <style name="ButtonColor" parent="Widget.MaterialComponents.Button">
         <item name="android:backgroundTint">?attr/colorSecondary</item>
         <item name="android:padding">16dp</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="TextView" parent="Widget.MaterialComponents.TextView">

@@ -18,12 +18,6 @@ class CharacterDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-//        val character = myDB.getOneCharacter(intent.getStringExtra("id").toString())
-//        val bitmap = BitmapFactory.decodeByteArray(character.image, 0, character.image.size)
-//
-//        binding.characterImage.setImageBitmap(bitmap)
-//        binding.characterName.text = character.name
-
         binding.editButton.setOnClickListener { goToUpdateView() }
         binding.deleteButton.setOnClickListener { deleteDialog() }
     }

@@ -31,18 +31,17 @@ class MainActivity : AppCompatActivity() {
         if (characters.ids.size == 0) {
             startActivity(Intent(this, AddCharacterActivity::class.java))
         } else {
-        val randomId = characters.ids.random()
-        val randomCharacter = myDB.getOneCharacter(randomId)
-        val bitmap =
-            BitmapFactory.decodeByteArray(randomCharacter.image, 0, randomCharacter.image.size)
+            val randomId = characters.ids.random()
+            val randomCharacter = myDB.getOneCharacter(randomId)
+            val bitmap =
+                BitmapFactory.decodeByteArray(randomCharacter.image, 0, randomCharacter.image.size)
 
-        val affirmations = resources.getStringArray(R.array.default_affirmations)
-        val randomAffirmation = affirmations.random()
+            val affirmations = resources.getStringArray(R.array.default_affirmations)
+            val randomAffirmation = affirmations.random()
 
-        binding.affirmationImage.setImageBitmap(bitmap)
-        binding.affirmationName.text = randomCharacter.name
-        binding.affirmationText.text = randomAffirmation
+            binding.affirmationImage.setImageBitmap(bitmap)
+            binding.affirmationName.text = randomCharacter.name
+            binding.affirmationText.text = randomAffirmation
         }
     }
-
 }
