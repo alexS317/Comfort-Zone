@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Affirmation App</string>
-    
+
     <string-array name="default_affirmations">
         <item>is proud of you!</item>
         <item>wants you to have a great day!</item>
@@ -13,4 +13,6 @@
         <item>knows you are capable!</item>
         <item>knows you are smart!</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
