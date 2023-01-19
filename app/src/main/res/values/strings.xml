@@ -4,8 +4,13 @@
     <string-array name="default_affirmations">
         <item>is proud of you!</item>
         <item>wants you to have a great day!</item>
+        <item>wants you to be kind to yourself!</item>
         <item>believes in you!</item>
         <item>says you are important!</item>
-        <item>says your are enough!</item>
+        <item>says you are enough!</item>
+        <item>says you are strong!</item>
+        <item>knows you can do it!</item>
+        <item>knows you are capable!</item>
+        <item>knows you are smart!</item>
     </string-array>
 </resources>

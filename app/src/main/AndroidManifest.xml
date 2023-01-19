@@ -15,7 +15,8 @@
         <activity
             android:name=".GalleryActivity"
             android:exported="false"
-            android:label="Gallery">
+            android:label="Gallery"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -23,7 +24,8 @@
         <activity
             android:name=".CharacterDetailActivity"
             android:exported="false"
-            android:label="Character Details">
+            android:label="Character Details"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -31,14 +33,16 @@
         <activity
             android:name=".AddCharacterActivity"
             android:exported="false"
-            android:label="Character Upload">
+            android:label="Character Upload"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -12,8 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 class CharacterAdapter(
     private val context: Context,
     private val characterIds: MutableList<String>,
-    private val characterImages: MutableList<ByteArray>,
-    private val characterNames: MutableList<String>
+    private val characterImages: MutableList<ByteArray>
 ) : RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
 
     class CharacterViewHolder(view: View) : RecyclerView.ViewHolder(view) {

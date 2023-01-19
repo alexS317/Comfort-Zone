@@ -23,7 +23,7 @@ class GalleryActivity : AppCompatActivity() {
         super.onResume()
         val characters = myDB.getAllCharacters()
         binding.characterGallery.adapter =
-            CharacterAdapter(this, characters.ids, characters.images, characters.names)
+            CharacterAdapter(this, characters.ids, characters.images)
 
     }
 
