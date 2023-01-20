@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 
@@ -45,13 +46,18 @@ class AffirmationAdapter(
                 builder.setMessage("Do you really want to delete this affirmation entry?")
                 builder.setPositiveButton("Yes") { dialog, which ->
                     myDB.deleteAffirmation(affirmationId)
+                    Toast.makeText(
+                        context,
+                        "Affirmation deleted.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    AffirmationFragment().onResume()
                 }
                 builder.setNegativeButton("No") { dialog, which ->
                     dialog.dismiss()
                 }
                 val alertDialog = builder.create()
                 alertDialog.show()
-
             }
         }
 

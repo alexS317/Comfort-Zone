@@ -36,7 +36,8 @@ class MainActivity : AppCompatActivity() {
             val bitmap =
                 BitmapFactory.decodeByteArray(randomCharacter.image, 0, randomCharacter.image.size)
 
-            val defaultAffirmations = resources.getStringArray(R.array.default_affirmations).toMutableList()
+            val defaultAffirmations =
+                resources.getStringArray(R.array.default_affirmations).toMutableList()
             val customAffirmations = myDB.getAllAffirmations()
             val allAffirmations = defaultAffirmations.union(customAffirmations.second)
 

@@ -16,24 +16,11 @@
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:adjustViewBounds="true"
-            android:contentDescription="Image input"
+            android:contentDescription="@string/image_input"
             android:src="@drawable/ic_image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <!--        <EditText-->
-        <!--            android:id="@+id/name_input"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_marginVertical="20dp"-->
-        <!--            android:autofillHints="no"-->
-        <!--            android:hint="Character name"-->
-        <!--            android:inputType="textPersonName"-->
-        <!--            android:textSize="20sp"-->
-        <!--            app:layout_constraintEnd_toEndOf="@id/image_input"-->
-        <!--            app:layout_constraintStart_toStartOf="@id/image_input"-->
-        <!--            app:layout_constraintTop_toBottomOf="@id/image_input" />-->
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/name_layout"
@@ -41,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="20dp"
             android:autofillHints="no"
-            android:hint="Character name"
+            android:hint="@string/character_name"
             app:layout_constraintEnd_toEndOf="@id/image_input"
             app:layout_constraintStart_toStartOf="@id/image_input"
             app:layout_constraintTop_toBottomOf="@id/image_input">
@@ -62,7 +49,7 @@
             android:layout_marginTop="50dp"
             android:paddingStart="60dp"
             android:paddingEnd="60dp"
-            android:text="Save"
+            android:text="@string/save"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/name_layout" />

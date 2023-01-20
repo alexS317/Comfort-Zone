@@ -1,5 +1,20 @@
 <resources>
-    <string name="app_name">Affirmation App</string>
+    <string name="app_name">Comfort Zone</string>
+
+    <string name="get_affirmation">Get Affirmation</string>
+    <string name="gallery">Gallery</string>
+    <string name="characters">Characters</string>
+    <string name="affirmations">Affirmations</string>
+    <string name="character_image">Character image</string>
+    <string name="character_name">Character name</string>
+    <string name="image_input">Image input</string>
+    <string name="edit_button">Edit button</string>
+    <string name="delete_button">Delete button</string>
+    <string name="add_button">Add button</string>
+    <string name="save">Save</string>
+    <string name="add_your_affirmation">Add your affirmation ...</string>
+    <string name="default_affirmations">Default</string>
+    <string name="custom_affirmations">Custom</string>
 
     <string-array name="default_affirmations">
         <item>is proud of you!</item>
@@ -13,6 +28,4 @@
         <item>knows you are capable!</item>
         <item>knows you are smart!</item>
     </string-array>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

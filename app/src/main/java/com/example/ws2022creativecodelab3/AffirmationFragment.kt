@@ -5,7 +5,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import com.example.ws2022creativecodelab3.databinding.FragmentAffirmationBinding
 
 class AffirmationFragment : Fragment() {

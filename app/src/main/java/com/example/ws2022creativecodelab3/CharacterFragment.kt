@@ -25,7 +25,8 @@ class CharacterFragment : Fragment() {
         val myDB = DatabaseHandler(requireView().context)
 
         val characters = myDB.getAllCharacters()
-        binding.characterGallery.adapter = CharacterAdapter(requireContext(), characters.ids, characters.images)
+        binding.characterGallery.adapter =
+            CharacterAdapter(requireContext(), characters.ids, characters.images)
 
     }
 }

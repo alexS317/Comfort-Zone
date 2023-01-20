@@ -3,7 +3,6 @@ package com.example.ws2022creativecodelab3
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.ws2022creativecodelab3.databinding.ActivityGalleryBinding
