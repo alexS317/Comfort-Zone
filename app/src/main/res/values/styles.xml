@@ -12,4 +12,8 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="TabBar" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:background">?attr/background</item>
+    </style>
+
 </resources>

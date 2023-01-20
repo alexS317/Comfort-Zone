@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <TextView
@@ -12,4 +13,14 @@
         android:textSize="16sp"
         tools:text="Affirmation" />
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center"
+        android:contentDescription="Delete button"
+        android:src="@drawable/ic_close"
+        app:tint="?android:textColor" />
+
+</RelativeLayout>

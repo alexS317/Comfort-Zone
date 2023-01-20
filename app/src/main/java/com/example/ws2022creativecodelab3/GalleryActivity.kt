@@ -3,6 +3,7 @@ package com.example.ws2022creativecodelab3
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.ws2022creativecodelab3.databinding.ActivityGalleryBinding
@@ -28,8 +29,14 @@ class GalleryActivity : AppCompatActivity() {
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 when (binding.tabBar.selectedTabPosition) {
-                    0 -> navController.navigate(R.id.characterFragment)
-                    else -> navController.navigate(R.id.affirmationFragment)
+                    0 -> {
+                        navController.navigate(R.id.characterFragment)
+                        binding.addCharacterButton.setOnClickListener { goToAddCharacterView() }
+                    }
+                    else -> {
+                        navController.navigate(R.id.affirmationFragment)
+                        binding.addCharacterButton.setOnClickListener { goToAddAffirmationView() }
+                    }
                 }
             }
 
@@ -38,17 +45,8 @@ class GalleryActivity : AppCompatActivity() {
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
         })
 
-        binding.addCharacterButton.setOnClickListener { goToAddCharacterView() }
+
     }
-
-
-//    override fun onResume() {
-//        super.onResume()
-//        val characters = myDB.getAllCharacters()
-//        binding.characterGallery.adapter =
-//            CharacterAdapter(this, characters.ids, characters.images)
-//
-//    }
 
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
@@ -57,5 +55,9 @@ class GalleryActivity : AppCompatActivity() {
 
     private fun goToAddCharacterView() {
         startActivity(Intent(this, AddCharacterActivity::class.java))
+    }
+
+    private fun goToAddAffirmationView() {
+        startActivity(Intent(this, AddAffirmationActivity::class.java))
     }
 }

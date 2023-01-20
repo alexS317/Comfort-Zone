@@ -36,12 +36,13 @@ class MainActivity : AppCompatActivity() {
             val bitmap =
                 BitmapFactory.decodeByteArray(randomCharacter.image, 0, randomCharacter.image.size)
 
-            val affirmations = resources.getStringArray(R.array.default_affirmations)
-            val randomAffirmation = affirmations.random()
+            val defaultAffirmations = resources.getStringArray(R.array.default_affirmations).toMutableList()
+            val customAffirmations = myDB.getAllAffirmations()
+            val allAffirmations = defaultAffirmations.union(customAffirmations.second)
 
             binding.affirmationImage.setImageBitmap(bitmap)
             binding.affirmationName.text = randomCharacter.name
-            binding.affirmationText.text = randomAffirmation
+            binding.affirmationText.text = allAffirmations.random()
         }
     }
 }

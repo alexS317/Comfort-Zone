@@ -17,6 +17,7 @@
         <item name="textInputStyle">@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox</item>
         <item name="colorSurface">@color/deep_purple_400</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back</item>
+        <item name="background">@color/black</item>
     </style>
 
 </resources>
