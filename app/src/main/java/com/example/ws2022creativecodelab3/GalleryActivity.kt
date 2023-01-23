@@ -12,7 +12,6 @@ class GalleryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityGalleryBinding
     private lateinit var navController: NavController
-//    private val myDB = DatabaseHandler(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,11 +29,9 @@ class GalleryActivity : AppCompatActivity() {
                 when (binding.tabBar.selectedTabPosition) {
                     0 -> {
                         navController.navigate(R.id.characterFragment)
-                        binding.addCharacterButton.setOnClickListener { goToAddCharacterView() }
                     }
                     else -> {
                         navController.navigate(R.id.affirmationFragment)
-                        binding.addCharacterButton.setOnClickListener { goToAddAffirmationView() }
                     }
                 }
             }
@@ -44,7 +41,13 @@ class GalleryActivity : AppCompatActivity() {
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
         })
 
+        binding.addButton.setOnClickListener {
+            val currentFragment = navHostFragment.childFragmentManager.primaryNavigationFragment
+            val fragmentName = currentFragment!!.javaClass.simpleName
 
+            if (fragmentName == "CharacterFragment") goToAddCharacterView()
+            else goToAddAffirmationView()
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
