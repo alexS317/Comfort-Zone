@@ -1,7 +1,6 @@
 package com.example.ws2022creativecodelab3
 
 import android.content.Context
-import android.content.Intent
 import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +9,9 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 
 class CharacterAdapter(
-    private val context: Context,
     private val characterIds: MutableList<String>,
-    private val characterImages: MutableList<ByteArray>
+    private val characterImages: MutableList<ByteArray>,
+    private val clickedCharacter: (String) -> Unit
 ) : RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
 
     class CharacterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -28,15 +27,15 @@ class CharacterAdapter(
     override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
         val characterId = characterIds[position]
         val characterImage = characterImages[position]
-        val bitmap = BitmapFactory.decodeByteArray(characterImage, 0, characterImage.size)
+        val bitmap = BitmapFactory.decodeByteArray(
+            characterImage,
+            0,
+            characterImage.size
+        )  // convert byteArray to image bitmap
 
         holder.image.setImageBitmap(bitmap)
 
-        holder.itemView.setOnClickListener {
-            val detailView = Intent(context, CharacterDetailActivity::class.java)
-            detailView.putExtra("id", characterId)
-            context.startActivity(detailView)
-        }
+        holder.itemView.setOnClickListener { clickedCharacter(characterId) }
     }
 
     override fun getItemCount(): Int {

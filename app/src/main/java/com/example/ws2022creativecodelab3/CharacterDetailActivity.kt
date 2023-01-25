@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import com.example.ws2022creativecodelab3.databinding.ActivityCharacterDetailBinding
 
@@ -25,7 +26,7 @@ class CharacterDetailActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         val character = myDB.getOneCharacter(intent.getStringExtra("id").toString())
-        val bitmap = BitmapFactory.decodeByteArray(character.image, 0, character.image.size)
+        val bitmap = BitmapFactory.decodeByteArray(character.image, 0, character.image.size)    // convert byteArray to image bitmap
 
         binding.characterImage.setImageBitmap(bitmap)
         binding.characterName.text = character.name
@@ -46,6 +47,7 @@ class CharacterDetailActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Delete Character")
         builder.setMessage("Do you really want to delete this character entry?")
+
         builder.setPositiveButton("Yes") { dialog, which ->
             myDB.deleteCharacter(intent.getStringExtra("id").toString())
             finish()
@@ -53,6 +55,7 @@ class CharacterDetailActivity : AppCompatActivity() {
         builder.setNegativeButton("No") { dialog, which ->
             dialog.dismiss()
         }
+
         val alertDialog = builder.create()
         alertDialog.show()
     }

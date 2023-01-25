@@ -28,19 +28,26 @@ class AddCharacterActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.imageInput.setOnClickListener {
-            val phoneGallery = Intent(Intent.ACTION_PICK, Media.INTERNAL_CONTENT_URI)
+            val phoneGallery =
+                Intent(Intent.ACTION_PICK, Media.INTERNAL_CONTENT_URI)   // Open phone media storage
             resultLauncher.launch(phoneGallery)
         }
 
+        // If updating an existing character (id exists), insert the old image an name first and call update function
         if (intent.getStringExtra("id") != null) {
             val character = myDB.getOneCharacter(intent.getStringExtra("id").toString())
-            val bitmap = BitmapFactory.decodeByteArray(character.image, 0, character.image.size)
+            val bitmap = BitmapFactory.decodeByteArray(
+                character.image,
+                0,
+                character.image.size
+            )    // convert byteArray to image bitmap
 
             binding.imageInput.setImageBitmap(bitmap)
             binding.nameInput.setText(character.name)
 
             binding.saveButton.setOnClickListener { updateOldCharacter() }
         } else {
+            // If id doesn't exist, save new character entry
             binding.saveButton.setOnClickListener { saveNewCharacter() }
         }
     }
@@ -50,6 +57,7 @@ class AddCharacterActivity : AppCompatActivity() {
         return true
     }
 
+    // Insert URI of selected image into the input
     private val resultLauncher =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -60,32 +68,40 @@ class AddCharacterActivity : AppCompatActivity() {
 
     @RequiresApi(Build.VERSION_CODES.M)
     private fun saveNewCharacter() {
-        val bitmap = binding.imageInput.drawToBitmap()
-        val stream = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-        val image = stream.toByteArray()
-        val name = binding.nameInput.text.toString()
+        val inputs = getDataFromInputs()
 
-        if (!binding.imageInput.drawable.isFilterBitmap || name == "") {
+        if (!binding.imageInput.drawable.isFilterBitmap || inputs.second == "") {
             Toast.makeText(this, "Please enter a valid name and image.", Toast.LENGTH_SHORT).show()
         } else {
-            myDB.addCharacter(image, name)
+            myDB.addCharacter(inputs.first, inputs.second)
             finish()
         }
     }
 
     private fun updateOldCharacter() {
+        val inputs = getDataFromInputs()
+
+        if (inputs.second == "") {
+            Toast.makeText(this, "Please enter a valid name.", Toast.LENGTH_SHORT).show()
+        } else {
+            myDB.updateCharacter(
+                intent.getStringExtra("id").toString(),
+                inputs.first,
+                inputs.second
+            )
+            finish()
+        }
+    }
+
+    private fun getDataFromInputs(): Pair<ByteArray, String> {
+        // Get image bitmap and convert it to byteArray
         val bitmap = binding.imageInput.drawToBitmap()
         val stream = ByteArrayOutputStream()
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
         val image = stream.toByteArray()
+
         val name = binding.nameInput.text.toString()
 
-        if (name == "") {
-            Toast.makeText(this, "Please enter a valid name.", Toast.LENGTH_SHORT).show()
-        } else {
-            myDB.updateCharacter(intent.getStringExtra("id").toString(), image, name)
-            finish()
-        }
+        return Pair(image, name)
     }
 }

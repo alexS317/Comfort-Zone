@@ -5,11 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import com.example.ws2022creativecodelab3.databinding.FragmentCharacterBinding
 
 class CharacterFragment : Fragment() {
 
     private lateinit var binding: FragmentCharacterBinding
+    private val characterViewModel: CharacterViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,11 +24,12 @@ class CharacterFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        val myDB = DatabaseHandler(requireView().context)
+        val myDB = DatabaseHandler(requireContext())
 
         val characters = myDB.getAllCharacters()
         binding.characterGallery.adapter =
-            CharacterAdapter(requireContext(), characters.ids, characters.images)
-
+            CharacterAdapter(characters.ids, characters.images) { id ->
+                characterViewModel.characterClicked(id)
+            }
     }
 }

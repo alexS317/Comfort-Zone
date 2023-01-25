@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
     private fun getRandomCharacter() {
         val characters = myDB.getAllCharacters()
 
+        // If there are no character entries in the database yet, open the activity to add a new character
         if (characters.ids.size == 0) {
             startActivity(Intent(this, AddCharacterActivity::class.java))
         } else {

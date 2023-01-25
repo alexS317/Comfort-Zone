@@ -38,26 +38,14 @@ class AffirmationAdapter(
         holder.affirmationText.text = affirmation
         holder.affirmationDelete.visibility = View.INVISIBLE
 
+        // Make affirmations only clickable if they have an id in the database (only custom affirmations)
+        // For predefined affirmations, id and text are the same value
         if (affirmationIds != defaultAffirmations) {
-            holder.affirmationDelete.visibility = View.VISIBLE
+            holder.affirmationDelete.visibility =
+                View.VISIBLE  // Delete button only visible for custom affirmations
+
             holder.itemView.setOnClickListener {
-                val builder = AlertDialog.Builder(context)
-                builder.setTitle("Delete Affirmation")
-                builder.setMessage("Do you really want to delete this affirmation entry?")
-                builder.setPositiveButton("Yes") { dialog, which ->
-                    myDB.deleteAffirmation(affirmationId)
-                    Toast.makeText(
-                        context,
-                        "Affirmation deleted.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    AffirmationFragment().onResume()
-                }
-                builder.setNegativeButton("No") { dialog, which ->
-                    dialog.dismiss()
-                }
-                val alertDialog = builder.create()
-                alertDialog.show()
+                deleteAffirmationDialog(affirmationId)
             }
         }
 
@@ -65,5 +53,23 @@ class AffirmationAdapter(
 
     override fun getItemCount(): Int {
         return affirmations.size
+    }
+
+    private fun deleteAffirmationDialog(id: String) {
+        val builder = AlertDialog.Builder(context)
+        builder.setTitle("Delete Affirmation")
+        builder.setMessage("Do you really want to delete this affirmation entry?")
+
+        builder.setPositiveButton("Yes") { dialog, which ->
+            myDB.deleteAffirmation(id)
+            Toast.makeText(context, "Affirmation deleted.", Toast.LENGTH_SHORT).show()
+            AffirmationFragment().onResume()
+        }
+        builder.setNegativeButton("No") { dialog, which ->
+            dialog.dismiss()
+        }
+
+        val alertDialog = builder.create()
+        alertDialog.show()
     }
 }

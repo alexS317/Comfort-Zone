@@ -22,14 +22,13 @@ class AffirmationFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        val myDB = DatabaseHandler(requireContext())
 
         val defaultAffirmations =
             resources.getStringArray(R.array.default_affirmations).toMutableList()
-
         binding.defaultAffirmations.adapter =
             AffirmationAdapter(requireContext(), defaultAffirmations, defaultAffirmations)
 
-        val myDB = DatabaseHandler(requireView().context)
         val customAffirmations = myDB.getAllAffirmations()
         binding.customAffirmations.adapter = AffirmationAdapter(
             requireContext(),

@@ -15,7 +15,8 @@
         <activity
             android:name=".AddAffirmationActivity"
             android:exported="false"
-            android:label="Add Affirmation">
+            android:label="Add Affirmation"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
